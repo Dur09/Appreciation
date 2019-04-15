@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet"/>
+         <!-- Bootstrap -->
+        <link
+            href="/bootstrap/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+            <div role="main">
+                    <div class="row">
+                      <div class="col-md-3">
+                          <div class="col-sm-9">
+                                <label>
+                                        <h4>Search</h4>
+                                </label>
+                              <select
+                                  id="advertiseID"
+                                  class="col-sm-9"
+                                  name="advertise"
+                                  style="padding:5px;"
+                              >
+                              </select>
+                          </div>
+                      </div>
+                    </div>
+            </div>
+            <div class="row"></div>
+            <div role="main">
+            <div class="row">
+                    <div class="col-md-6">
+            <table id="example" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Associate Name</th>
+                            <th>Associate Id</th>
+                            <th>Group</th>
+                            <th>Division</th>
+                            <th>Project</th>
+                        </tr>
+                    </thead>
+            </table>
+            </div>
+            </div>
+            </div>
+            <script  src="https://code.jquery.com/jquery-3.3.1.js">
+            </script>
+            <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js">
+            </script>
+             <!-- Bootstrap -->
+            <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+            <script>
+                $('table').dataTable({searching: false, paging: false, info: false});
+                $(document).ready(function() {
+                    $('#example').DataTable( {
+                        "ajax": "arrays.txt"
+                    } );
+                } );
+</script>
+    </body>
+</html>
