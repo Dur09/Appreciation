@@ -2,26 +2,64 @@
 <html>
 <head>
 <title>Weather</title>
-<input type="text" id='location'>
-<div id="temperature">
-Current Temperature (in Deg Celsius)
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script>
-    function gettingJSON(){
-        $.getJSON("http://api.openweathermap.org/data/2.5/weather?q=Pune&units=metric&APPID=43f2d534d2ef9b0ea50ddf0537de9bf4",function(json){
-            ///document.write(JSON.stringify(json));
-             var result = JSON.parse(JSON.stringify(json));
-			 //(data["main"]["temp"])
-            console.log(JSON.stringify(result["main"]["temp"]));
-			var div = document.getElementById('temperature');
-			document.write(JSON.stringify(result["main"]["temp"]));
-			//div.innerHTML =( JSON.stringify(result["main"]["temp"]));
-        });
-    }
-    </script>
+    <!-- Bootstrap -->
+    <link
+      href="bootstrap/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
 </head>
-<body>
-<button id = "getIt" onclick = "gettingJSON()">Get Weather</button>
+<body class="nav-md">
+    <div class="container">
+        <div class="row">
+            <div class=" right_col" role="main">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-6 col-sm-4 col-xs-12">
+                            <div class="panel panel-default">
+                              <div class="panel-heading">
+                                Weather Monitor
+                              </div>
+                                <div class="panel-body">
+                                    <div class="form-group row">
+                                        <label
+                                          for="fileUpload"
+                                          class="col-sm-offset-1 col-sm-2 col-form-label"
+                                          >Location:</label
+                                        >
+                                        <div class="col-sm-6">
+                                            <input class="form-control" placeholder="Enter Location" type="text" id='location'> 
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label  class="col-sm-offset-1 col-sm-2 col-form-label" id="temperature">
+                                            Temperature:
+                                        </label>
+                                            <strong><span class="col-sm-offset-1 col-sm-2 col-form-label" id="showtemp"></span></strong>
+                                    </div>
+                                    <button class="btn btn-primary" id = "getIt" onclick = "getWeather()">Get Weather</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <script>
+       function getWeather(){
+           var inputLoc = $('#location').val();
+           $.getJSON("http://api.openweathermap.org/data/2.5/weather?q=" + inputLoc + "&units=metric&APPID=43f2d534d2ef9b0ea50ddf0537de9bf4",function(response){
+               console.log(JSON.stringify(response));
+               var result = JSON.parse(JSON.stringify(response));
+               //console.log(JSON.stringify(result["main"]["temp"]));
+               var showTemp = document.getElementById('showtemp');
+               //document.write(JSON.stringify(result["main"]["temp"]));
+               showTemp.innerHTML =( JSON.stringify(result["main"]["temp"]));
+           });
+       }
+    </script>
 </body>
 </html>
